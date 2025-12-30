@@ -3,8 +3,8 @@ import {TypographyLead} from "@/shadcn/typography/typography-lead";
 import {TypographyP} from "@/shadcn/typography/typography-p";
 import {Card, CardContent, CardHeader} from "@/shadcn/ui/card";
 import {CoffeeIcon} from "lucide-react";
-import {BrewerModificationForm} from "./forms/brewer-modification-form";
-import {BrewerDeletionForm} from "./forms/brewer-deletion-form";
+import {BrewerModificationForm} from "@/components/forms/brewer-modification-form";
+import {BrewerDeletionForm} from "@/components/forms/brewer-deletion-form";
 
 export function BrewerList() {
   const brewers = useQueryAllBrewers();

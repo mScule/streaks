@@ -1,6 +1,6 @@
-import {BrewerList} from "@/components/brewer-list";
-import {CoffeeCalculator} from "@/components/coffee-calculator";
-import {CoffeeList} from "@/components/coffee-list";
+import {BrewerList} from "@/components/lists/brewer-list";
+import {CoffeeList} from "@/components/lists/coffee-list";
+import {BrewCalculator} from "@/components/brew-calculator";
 import {BrewerCreationForm} from "@/components/forms/brewer-creation-form";
 import {CoffeeCreationForm} from "@/components/forms/coffee-creation-form";
 import {Logo} from "@/components/logo";
@@ -19,14 +19,14 @@ export function Index() {
           <TabsTrigger value="coffee">Coffee</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="main" className="flex flex-col gap-5 px-2 w-screen max-w-2xl">
+        <TabsContent value="main" className="flex flex-col gap-3 px-2 w-screen max-w-2xl">
           <div className="flex flex-row gap-5 justify-between w-full">
             <TypographyH2>Brew</TypographyH2>
           </div>
-          <CoffeeCalculator />
+          <BrewCalculator />
         </TabsContent>
 
-        <TabsContent value="brewers" className="flex flex-col gap-5 px-2 w-screen max-w-2xl">
+        <TabsContent value="brewers" className="flex flex-col gap-3 px-2 w-screen max-w-2xl">
           <div className="flex flex-row gap-5 justify-between w-full">
             <TypographyH2>Brewers</TypographyH2>
             <BrewerCreationForm />
@@ -34,7 +34,7 @@ export function Index() {
           <BrewerList />
         </TabsContent>
 
-        <TabsContent value="coffee" className="flex flex-col gap-5 px-2 w-screen max-w-2xl">
+        <TabsContent value="coffee" className="flex flex-col gap-3 px-2 w-screen max-w-2xl">
           <div className="flex flex-row gap-5 justify-between w-full">
             <TypographyH2>Coffee</TypographyH2>
             <CoffeeCreationForm />
