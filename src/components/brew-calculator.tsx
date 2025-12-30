@@ -2,7 +2,7 @@ import {useQueryAllBrewers} from "@/react-query/hooks/brewer/use-query-all-brewe
 import {useQueryAllCoffee} from "@/react-query/hooks/coffee/use-query-all-coffee";
 import {TypographyP} from "@/shadcn/typography/typography-p";
 import {Button} from "@/shadcn/ui/button";
-import {Card, CardContent, CardHeader, CardTitle} from "@/shadcn/ui/card";
+import {Card, CardContent} from "@/shadcn/ui/card";
 import {
   Select,
   SelectContent,
