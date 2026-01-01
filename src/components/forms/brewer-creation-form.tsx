@@ -9,10 +9,10 @@ import {Button} from "@/shadcn/ui/button";
 import z from "zod";
 import {useState} from "react";
 import {PlusIcon} from "lucide-react";
-import {TypographySmall} from "@/shadcn/typography/typography-small";
 import {PositiveIntegerSchema} from "@/form-value-schemas/positive-integer-schema";
 import {NameSchema} from "@/form-value-schemas/name-schema";
-import {Alert, AlertDescription, AlertTitle} from "@/shadcn/ui/alert";
+import {CupInMlHint} from "../hints/cup-in-ml-hint";
+import {FieldError} from "../field-error";
 
 const BrewerCreationFormSchema = z.object({
   name: NameSchema,
@@ -71,12 +71,7 @@ export function BrewerCreationForm() {
                     <FieldLabel>Name</FieldLabel>
                     <Input placeholder="Acme Coffee Maker" {...field} />
                   </Field>
-                  {fieldState.error && (
-                    <Alert variant="destructive">
-                      <AlertTitle>Incorrect Input</AlertTitle>
-                      <AlertDescription>{fieldState.error.message}</AlertDescription>
-                    </Alert>
-                  )}
+                  {fieldState.error && <FieldError message={fieldState.error.message} />}
                 </>
               )}
             />
@@ -87,21 +82,10 @@ export function BrewerCreationForm() {
                 <>
                   <Field data-invalid={fieldState.invalid}>
                     <FieldLabel>Cup size in millilitres</FieldLabel>
-                    <TypographySmall>
-                      <i>
-                        Give it in following format: <b className="text-green-500">125</b>. Values like{" "}
-                        <b className="text-destructive">1.25</b> or <b className="text-destructive">1,25</b> aren't
-                        allowed.
-                      </i>
-                    </TypographySmall>
+                    <CupInMlHint />
                     <Input placeholder="For example 1.25ml is 125" {...field} />
                   </Field>
-                  {fieldState.error && (
-                    <Alert variant="destructive">
-                      <AlertTitle>Incorrect Input</AlertTitle>
-                      <AlertDescription>{fieldState.error.message}</AlertDescription>
-                    </Alert>
-                  )}
+                  {fieldState.error && <FieldError message={fieldState.error.message} />}
                 </>
               )}
             />

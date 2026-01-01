@@ -11,7 +11,9 @@ import {useState} from "react";
 import {PlusIcon} from "lucide-react";
 import {PositiveIntegerSchema} from "@/form-value-schemas/positive-integer-schema";
 import {NameSchema} from "@/form-value-schemas/name-schema";
-import {Alert, AlertDescription, AlertTitle} from "@/shadcn/ui/alert";
+import {CupInMlHint} from "../hints/cup-in-ml-hint";
+import {FieldError} from "../field-error";
+import {CoffeeInGramsHint} from "../hints/coffee-in-grams-hint";
 
 const CoffeeCreationFormSchema = z.object({
   name: NameSchema,
@@ -52,17 +54,17 @@ export function CoffeeCreationForm() {
 
   return (
     <Dialog open={isOpen} onOpenChange={isOpen => setIsOpen(isOpen)}>
-      <form id="coffee-creation-form" onSubmit={form.handleSubmit(submitCreateCoffee)}>
-        <DialogTrigger asChild>
-          <Button variant="outline">
-            <span>Add new</span>
-            <PlusIcon />
-          </Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Add new Coffee</DialogTitle>
-          </DialogHeader>
+      <DialogTrigger asChild>
+        <Button variant="outline">
+          <span>Add new</span>
+          <PlusIcon />
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Add new coffee</DialogTitle>
+        </DialogHeader>
+        <form onSubmit={form.handleSubmit(submitCreateCoffee)}>
           <FieldGroup>
             <Controller
               control={form.control}
@@ -71,14 +73,9 @@ export function CoffeeCreationForm() {
                 <>
                   <Field data-invalid={fieldState.invalid}>
                     <FieldLabel>Name</FieldLabel>
-                    <Input {...field} />
+                    <Input placeholder="Acme Coffee Dark Roast" {...field} />
                   </Field>
-                  {fieldState.error && (
-                    <Alert variant="destructive">
-                      <AlertTitle>Incorrect Input</AlertTitle>
-                      <AlertDescription>{fieldState.error.message}</AlertDescription>
-                    </Alert>
-                  )}
+                  {fieldState.error && <FieldError message={fieldState.error.message} />}
                 </>
               )}
             />
@@ -89,14 +86,10 @@ export function CoffeeCreationForm() {
                 <>
                   <Field data-invalid={fieldState.invalid}>
                     <FieldLabel>Cup size in millilitres</FieldLabel>
-                    <Input {...field} />
+                    <CupInMlHint />
+                    <Input placeholder="For example 1.25ml is 125" {...field} />
                   </Field>
-                  {fieldState.error && (
-                    <Alert variant="destructive">
-                      <AlertTitle>Incorrect Input</AlertTitle>
-                      <AlertDescription>{fieldState.error.message}</AlertDescription>
-                    </Alert>
-                  )}
+                  {fieldState.error && <FieldError message={fieldState.error.message} />}
                 </>
               )}
             />
@@ -107,23 +100,20 @@ export function CoffeeCreationForm() {
                 <>
                   <Field data-invalid={fieldState.invalid}>
                     <FieldLabel>Coffee in grams per cup</FieldLabel>
-                    <Input {...field} />
+                    <CoffeeInGramsHint />
+                    <Input placeholder="For example 7g is 7" {...field} />
                   </Field>
-                  {fieldState.error && (
-                    <Alert variant="destructive">
-                      <AlertTitle>Incorrect Input</AlertTitle>
-                      <AlertDescription>{fieldState.error.message}</AlertDescription>
-                    </Alert>
-                  )}
+                  {fieldState.error && <FieldError message={fieldState.error.message} />}
                 </>
               )}
             />
-            <Button type="submit" form="coffee-creation-form">
-              Add
+            <Button variant="outline" type="submit">
+              <span>Add new</span>
+              <PlusIcon />
             </Button>
           </FieldGroup>
-        </DialogContent>
-      </form>
+        </form>
+      </DialogContent>
     </Dialog>
   );
 }

@@ -11,7 +11,6 @@ import {Input} from "@/shadcn/ui/input";
 import {Button} from "@/shadcn/ui/button";
 import {Field, FieldGroup, FieldLabel} from "@/shadcn/ui/field";
 import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/shadcn/ui/dialog";
-import {Alert, AlertDescription, AlertTitle} from "@/shadcn/ui/alert";
 
 import type {WithId} from "@/types/with-id";
 import type {Brewer} from "@/types/brewer";
@@ -19,6 +18,8 @@ import {useUpdateBrewer} from "@/react-query/hooks/brewer/use-update-brewer";
 import {NameSchema} from "@/form-value-schemas/name-schema";
 import {PositiveIntegerSchema} from "@/form-value-schemas/positive-integer-schema";
 import {PenIcon} from "lucide-react";
+import { CupInMlHint } from "../hints/cup-in-ml-hint";
+import { FieldError } from "../field-error";
 
 const FormSchema = z.object({
   name: NameSchema.optional(),
@@ -70,7 +71,7 @@ export function BrewerModificationForm({brewer}: Props) {
         <DialogHeader>
           <DialogTitle>Update {brewer.name}</DialogTitle>
         </DialogHeader>
-        <form id="brewer-creation-form" onSubmit={form.handleSubmit(submitUpdateBrewer)}>
+        <form onSubmit={form.handleSubmit(submitUpdateBrewer)}>
           <FieldGroup>
             <Controller
               control={form.control}
@@ -81,12 +82,7 @@ export function BrewerModificationForm({brewer}: Props) {
                     <FieldLabel>Name</FieldLabel>
                     <Input placeholder={brewer.name} {...field} />
                   </Field>
-                  {fieldState.error && (
-                    <Alert variant="destructive">
-                      <AlertTitle>Incorrect Input</AlertTitle>
-                      <AlertDescription>{fieldState.error.message}</AlertDescription>
-                    </Alert>
-                  )}
+                  {fieldState.error && <FieldError message={fieldState.error.message} />}
                 </>
               )}
             />
@@ -97,14 +93,10 @@ export function BrewerModificationForm({brewer}: Props) {
                 <>
                   <Field data-invalid={fieldState.invalid}>
                     <FieldLabel>Cup size in millilitres</FieldLabel>
+                    <CupInMlHint />
                     <Input placeholder={brewer.cupInMillilitres + ""} {...field} />
                   </Field>
-                  {fieldState.error && (
-                    <Alert variant="destructive">
-                      <AlertTitle>Incorrect Input</AlertTitle>
-                      <AlertDescription>{fieldState.error.message}</AlertDescription>
-                    </Alert>
-                  )}
+                  {fieldState.error && <FieldError message={fieldState.error.message} />}
                 </>
               )}
             />

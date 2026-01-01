@@ -11,7 +11,6 @@ import {Input} from "@/shadcn/ui/input";
 import {Button} from "@/shadcn/ui/button";
 import {Field, FieldGroup, FieldLabel} from "@/shadcn/ui/field";
 import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/shadcn/ui/dialog";
-import {Alert, AlertDescription, AlertTitle} from "@/shadcn/ui/alert";
 
 import type {WithId} from "@/types/with-id";
 import {NameSchema} from "@/form-value-schemas/name-schema";
@@ -19,6 +18,9 @@ import {PositiveIntegerSchema} from "@/form-value-schemas/positive-integer-schem
 import {PenIcon} from "lucide-react";
 import {useUpdateCoffee} from "@/react-query/hooks/coffee/use-update-coffee";
 import type {Coffee} from "@/types/coffee";
+import {FieldError} from "../field-error";
+import {CupInMlHint} from "../hints/cup-in-ml-hint";
+import {CoffeeInGramsHint} from "../hints/coffee-in-grams-hint";
 
 const FormSchema = z.object({
   name: NameSchema.optional(),
@@ -84,12 +86,7 @@ export function CoffeeModificationForm({coffee}: Props) {
                     <FieldLabel>Name</FieldLabel>
                     <Input placeholder={coffee.name} {...field} />
                   </Field>
-                  {fieldState.error && (
-                    <Alert variant="destructive">
-                      <AlertTitle>Incorrect Input</AlertTitle>
-                      <AlertDescription>{fieldState.error.message}</AlertDescription>
-                    </Alert>
-                  )}
+                  {fieldState.error && <FieldError message={fieldState.error.message} />}
                 </>
               )}
             />
@@ -100,14 +97,10 @@ export function CoffeeModificationForm({coffee}: Props) {
                 <>
                   <Field data-invalid={fieldState.invalid}>
                     <FieldLabel>Cup size in millilitres</FieldLabel>
+                    <CupInMlHint />
                     <Input placeholder={coffee.cupInMillilitres + ""} {...field} />
                   </Field>
-                  {fieldState.error && (
-                    <Alert variant="destructive">
-                      <AlertTitle>Incorrect Input</AlertTitle>
-                      <AlertDescription>{fieldState.error.message}</AlertDescription>
-                    </Alert>
-                  )}
+                  {fieldState.error && <FieldError message={fieldState.error.message} />}
                 </>
               )}
             />
@@ -118,14 +111,10 @@ export function CoffeeModificationForm({coffee}: Props) {
                 <>
                   <Field data-invalid={fieldState.invalid}>
                     <FieldLabel>Coffee in grams per cup</FieldLabel>
+                    <CoffeeInGramsHint />
                     <Input placeholder={coffee.coffeeInGrams + ""} {...field} />
                   </Field>
-                  {fieldState.error && (
-                    <Alert variant="destructive">
-                      <AlertTitle>Incorrect Input</AlertTitle>
-                      <AlertDescription>{fieldState.error.message}</AlertDescription>
-                    </Alert>
-                  )}
+                  {fieldState.error && <FieldError message={fieldState.error.message} />}
                 </>
               )}
             />
