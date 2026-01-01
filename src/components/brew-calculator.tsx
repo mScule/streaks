@@ -59,7 +59,9 @@ export function BrewCalculator() {
       return null;
     }
 
-    return selectedBrewer.cupInMillilitres * cups;
+    const {cupInMillilitres} = selectedBrewer;
+
+    return cupInMillilitres * cups;
   }, [selectedBrewer, cups]);
 
   const gramsPerMl = useMemo<Nullable<number>>(() => {
@@ -67,7 +69,9 @@ export function BrewCalculator() {
       return null;
     }
 
-    return selectedCoffee.coffeeInGrams / (selectedCoffee.cupInMillilitres / 100);
+    const {coffeeInGrams, cupInMillilitres} = selectedCoffee;
+
+    return coffeeInGrams / (cupInMillilitres / 100);
   }, [selectedCoffee]);
 
   const totalBeans = useMemo<Nullable<number>>(() => {
