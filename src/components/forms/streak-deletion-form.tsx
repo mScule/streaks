@@ -4,7 +4,7 @@ import {Button} from "@/shadcn/ui/button";
 import {FieldGroup} from "@/shadcn/ui/field";
 import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/shadcn/ui/dialog";
 import type {WithId} from "@/types/with-id";
-import {RotateCcwIcon, TrashIcon} from "lucide-react";
+import {TrashIcon} from "lucide-react";
 import {TypographyP} from "@/shadcn/typography/typography-p";
 import type {Streak} from "@/types/streak";
 import {useDeleteStreak} from "@/react-query/hooks/streak/use-delete-streak";
