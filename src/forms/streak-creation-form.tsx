@@ -10,7 +10,7 @@ import z from "zod";
 import {useState} from "react";
 import {PlusIcon} from "lucide-react";
 import {NameSchema} from "@/form-value-schemas/name-schema";
-import {FieldError} from "../field-error";
+import {FieldError} from "../components/field-error";
 import { isoDateStringFromDate } from "@/functions/iso-date-string-from-date";
 
 const StreakCreationFormSchema = z.object({

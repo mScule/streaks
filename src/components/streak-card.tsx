@@ -4,8 +4,8 @@ import {differenceInDays} from "date-fns";
 import {last} from "lodash";
 
 import {StreakCounter} from "./streak-counter";
-import {StreakResetForm} from "./forms/streak-reset-form";
-import {StreakDeletionForm} from "./forms/streak-deletion-form";
+import {StreakResetForm} from "../forms/streak-reset-form";
+import {StreakDeletionForm} from "../forms/streak-deletion-form";
 import type {WithId} from "@/types/with-id";
 import clsx from "clsx";
 import { resolveRarityColor } from "@/functions/resolve-rarity-color";

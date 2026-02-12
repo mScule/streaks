@@ -1,4 +1,4 @@
-import {StreakCreationForm} from "@/components/forms/streak-creation-form";
+import {StreakCreationForm} from "@/forms/streak-creation-form";
 import {Logo} from "@/components/logo";
 import {StreakCard} from "@/components/streak-card";
 import {useQueryAllStreaks} from "@/react-query/hooks/streak/use-query-all-streaks";
