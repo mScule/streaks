@@ -1,6 +1,6 @@
-# Brew helper
+# Streaks
 
-Small utility app for measuring how much coffee beans you'll have to grind for x cups of coffee.
+Small app for counting streaks
 
 **Uses localstorage for storing data**
 
