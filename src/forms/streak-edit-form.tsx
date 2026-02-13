@@ -1,6 +1,5 @@
 import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {useCreateStreak} from "@/react-query/hooks/streak/use-create-streak";
 import {toast} from "sonner";
 import {Field, FieldGroup, FieldLabel} from "@/shadcn/ui/field";
 import {Input} from "@/shadcn/ui/input";
@@ -8,36 +7,42 @@ import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@
 import {Button} from "@/shadcn/ui/button";
 import z from "zod";
 import {useState} from "react";
-import {PlusIcon} from "lucide-react";
+import {PenIcon} from "lucide-react";
 import {NameSchema} from "@/form-value-schemas/name-schema";
 import {FieldError} from "../components/field-error";
-import { isoDateStringFromDate } from "@/functions/iso-date-string-from-date";
+import {useUpdateStreak} from "@/react-query/hooks/streak/use-update-streak";
+import type {WithId} from "@/types/with-id";
+import type {Streak} from "@/types/streak";
 
-const StreakCreationFormSchema = z.object({
-  name: NameSchema,
+const StreakEditFormSchema = z.object({
+  name: NameSchema
 });
 
-export function StreakCreationForm() {
-  const createStreak = useCreateStreak();
+type Props = {
+  streak: WithId<Streak>;
+};
+
+export function StreakEditForm({streak}: Props) {
+  const updateStreak = useUpdateStreak();
 
   const [isOpen, setIsOpen] = useState(false);
 
   const form = useForm({
-    resolver: zodResolver(StreakCreationFormSchema),
+    resolver: zodResolver(StreakEditFormSchema),
     defaultValues: {
       name: ""
     }
   });
 
-  async function submitCreateStreak(streak: z.infer<typeof StreakCreationFormSchema>) {
+  async function submitEditStreak(edited: z.infer<typeof StreakEditFormSchema>) {
     try {
-      const created = await createStreak.mutateAsync({
+      await updateStreak.mutateAsync({
+        id: streak.id,
         streak: {
-          name: streak.name,
-          resets: [isoDateStringFromDate(new Date())]
+          name: edited.name
         }
       });
-      toast.success(`Streak "${created.name}" added`);
+      toast.success(`Streak edited`);
       form.reset();
       setIsOpen(false);
     } catch {
@@ -49,15 +54,15 @@ export function StreakCreationForm() {
     <Dialog open={isOpen} onOpenChange={isOpen => setIsOpen(isOpen)}>
       <DialogTrigger asChild>
         <Button variant="outline">
-          <span>Add a new streak</span>
-          <PlusIcon />
+          <span>Edit</span>
+          <PenIcon />
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add a new streak</DialogTitle>
+          <DialogTitle>Edit streak</DialogTitle>
         </DialogHeader>
-        <form onSubmit={form.handleSubmit(submitCreateStreak)}>
+        <form onSubmit={form.handleSubmit(submitEditStreak)}>
           <FieldGroup>
             <Controller
               control={form.control}
@@ -66,15 +71,15 @@ export function StreakCreationForm() {
                 <>
                   <Field data-invalid={fieldState.invalid}>
                     <FieldLabel>Name</FieldLabel>
-                    <Input placeholder="No candy challenge" {...field} />
+                    <Input placeholder={streak.name} {...field} />
                   </Field>
                   {fieldState.error && <FieldError message={fieldState.error.message} />}
                 </>
               )}
             />
             <Button variant="outline" type="submit">
-              <span>Add new</span>
-              <PlusIcon />
+              <span>Edit</span>
+              <PenIcon />
             </Button>
           </FieldGroup>
         </form>

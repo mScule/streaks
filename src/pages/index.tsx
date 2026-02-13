@@ -7,9 +7,10 @@ export function Index() {
   const streaks = useQueryAllStreaks();
 
   return (
-    <main className="flex flex-col items-center gap-5 py-4">
+    <main className="flex flex-col items-center gap-12 py-4">
       <Logo />
 
+      <div className="flex flex-col items-center gap-3">
       {streaks.data && (
         <div className="flex flex-col gap-5">
           {streaks.data.map(streak => (
@@ -17,6 +18,7 @@ export function Index() {
           ))}
         </div>
       )}
+      </div>
 
       <StreakCreationForm />
     </main>

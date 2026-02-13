@@ -31,12 +31,14 @@ export function StreakDeletionForm({streak}: Props) {
   }
 
   return (
-    <Dialog open={isOpen} onOpenChange={isOpen => setIsOpen(isOpen)}>
+    <Dialog  open={isOpen} onOpenChange={isOpen => setIsOpen(isOpen)}>
       <DialogTrigger asChild>
         <Button variant="outline">
-          Delete <TrashIcon />
+          <span>Delete</span>
+          <TrashIcon />
         </Button>
       </DialogTrigger>
+
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Delete streak</DialogTitle>

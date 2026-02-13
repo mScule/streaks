@@ -38,7 +38,8 @@ export function StreakResetForm({streak}: Props) {
     <Dialog open={isOpen} onOpenChange={isOpen => setIsOpen(isOpen)}>
       <DialogTrigger asChild>
         <Button variant="outline">
-          Reset <RotateCcwIcon />
+          <span>Reset</span>
+          <RotateCcwIcon />
         </Button>
       </DialogTrigger>
       <DialogContent>
