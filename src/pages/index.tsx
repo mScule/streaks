@@ -14,7 +14,7 @@ export function Index() {
       {streaks.data && (
         <div className="flex flex-col gap-5">
           {streaks.data.map(streak => (
-            <StreakCard streak={streak} />
+            <StreakCard key={streak.id} streak={streak} />
           ))}
         </div>
       )}

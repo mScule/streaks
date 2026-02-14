@@ -8,6 +8,10 @@ import {TrashIcon} from "lucide-react";
 import {TypographyP} from "@/shadcn/typography/typography-p";
 import type {Streak} from "@/types/streak";
 import {useDeleteStreak} from "@/react-query/hooks/streak/use-delete-streak";
+import clsx from "clsx";
+import {resolveRarityColor} from "@/functions/resolve-rarity-color";
+import { resolveRarityFromDays } from "@/functions/resolve-rarity-from-days";
+import { resolveDaysFromResets } from "@/functions/resolve-rarity-from-resets";
 
 type Props = {
   streak: WithId<Streak>;
@@ -15,6 +19,8 @@ type Props = {
 
 export function StreakDeletionForm({streak}: Props) {
   const deleteStreak = useDeleteStreak();
+
+  const rarity = resolveRarityFromDays(resolveDaysFromResets(streak.resets));
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -31,12 +37,14 @@ export function StreakDeletionForm({streak}: Props) {
   }
 
   return (
-    <Dialog  open={isOpen} onOpenChange={isOpen => setIsOpen(isOpen)}>
+    <Dialog open={isOpen} onOpenChange={isOpen => setIsOpen(isOpen)}>
       <DialogTrigger asChild>
-        <Button variant="outline">
-          <span>Delete</span>
-          <TrashIcon />
-        </Button>
+        <div className={clsx("border rounded-xl", resolveRarityColor(rarity, "border"))}>
+          <Button variant="ghost" className={clsx(resolveRarityColor(rarity, "text"), "hover:bg-transparent!")}>
+            <span>Delete</span>
+            <TrashIcon />
+          </Button>
+        </div>
       </DialogTrigger>
 
       <DialogContent>

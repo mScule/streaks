@@ -9,6 +9,10 @@ import {TypographyP} from "@/shadcn/typography/typography-p";
 import type {Streak} from "@/types/streak";
 import {useUpdateStreak} from "@/react-query/hooks/streak/use-update-streak";
 import {isoDateStringFromDate} from "@/functions/iso-date-string-from-date";
+import {resolveRarityColor} from "@/functions/resolve-rarity-color";
+import {resolveRarityFromDays} from "@/functions/resolve-rarity-from-days";
+import {resolveDaysFromResets} from "@/functions/resolve-rarity-from-resets";
+import clsx from "clsx";
 
 type Props = {
   streak: WithId<Streak>;
@@ -16,6 +20,8 @@ type Props = {
 
 export function StreakResetForm({streak}: Props) {
   const updateStreak = useUpdateStreak();
+
+  const rarity = resolveRarityFromDays(resolveDaysFromResets(streak.resets));
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -37,10 +43,12 @@ export function StreakResetForm({streak}: Props) {
   return (
     <Dialog open={isOpen} onOpenChange={isOpen => setIsOpen(isOpen)}>
       <DialogTrigger asChild>
-        <Button variant="outline">
-          <span>Reset</span>
-          <RotateCcwIcon />
-        </Button>
+        <div className={clsx("border rounded-xl", resolveRarityColor(rarity, "border"))}>
+          <Button variant="ghost" className={clsx(resolveRarityColor(rarity, "text"), "hover:bg-transparent!")}>
+            <span>Reset</span>
+            <RotateCcwIcon />
+          </Button>
+        </div>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

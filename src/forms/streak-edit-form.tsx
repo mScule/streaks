@@ -13,6 +13,10 @@ import {FieldError} from "../components/field-error";
 import {useUpdateStreak} from "@/react-query/hooks/streak/use-update-streak";
 import type {WithId} from "@/types/with-id";
 import type {Streak} from "@/types/streak";
+import { resolveRarityFromDays } from "@/functions/resolve-rarity-from-days";
+import { resolveDaysFromResets } from "@/functions/resolve-rarity-from-resets";
+import clsx from "clsx";
+import { resolveRarityColor } from "@/functions/resolve-rarity-color";
 
 const StreakEditFormSchema = z.object({
   name: NameSchema
@@ -24,6 +28,8 @@ type Props = {
 
 export function StreakEditForm({streak}: Props) {
   const updateStreak = useUpdateStreak();
+
+  const rarity = resolveRarityFromDays(resolveDaysFromResets(streak.resets));
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -53,10 +59,12 @@ export function StreakEditForm({streak}: Props) {
   return (
     <Dialog open={isOpen} onOpenChange={isOpen => setIsOpen(isOpen)}>
       <DialogTrigger asChild>
-        <Button variant="outline">
+        <div className={clsx("border rounded-xl", resolveRarityColor(rarity, "border"))}>
+        <Button variant="ghost" className={clsx(resolveRarityColor(rarity, "text"), "hover:bg-transparent!")}>
           <span>Edit</span>
           <PenIcon />
         </Button>
+        </div>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
