@@ -10,5 +10,6 @@ type Props = {
 export function StreakLabel({rarity}: Props) {
   const color = resolveRarityColor(rarity);
   const label = resolveRarityLabel(rarity);
-  return <span className={clsx(color, "text-xs font-bold")}>{label}</span>;
+
+  return <span className={clsx(color, "text-xs font-bold italic")}>{label}</span>;
 }

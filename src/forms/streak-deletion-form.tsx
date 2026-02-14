@@ -8,8 +8,6 @@ import {TrashIcon} from "lucide-react";
 import {TypographyP} from "@/shadcn/typography/typography-p";
 import type {Streak} from "@/types/streak";
 import {useDeleteStreak} from "@/react-query/hooks/streak/use-delete-streak";
-import clsx from "clsx";
-import {resolveRarityColor} from "@/functions/resolve-rarity-color";
 import {resolveRarityFromDays} from "@/functions/resolve-rarity-from-days";
 import {resolveDaysFromResets} from "@/functions/resolve-rarity-from-resets";
 import StreakCardButton from "@/components/streak-card-button";

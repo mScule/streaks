@@ -7,5 +7,5 @@ type Props = {
 };
 
 export function StreakIcon({rarity}: Props) {
-  return <AppIcon size={24} className={resolveRarityColor(rarity)} />;
+  return <AppIcon size={18} className={resolveRarityColor(rarity)} />;
 }

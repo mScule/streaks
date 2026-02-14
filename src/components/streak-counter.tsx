@@ -12,11 +12,11 @@ export function StreakCounter({days}: Props) {
 
   return (
     <button className={clsx(
-      "pl-3 pr-4 py-1 gap-1 border rounded-4xl flex flex-row items-center justify-between",
+      "pl-2 pr-3 py-0.5 gap-1 border rounded-4xl flex flex-row items-center justify-between",
       resolveRarityColor(rarity, "border"),
       "bg-radial-[at_50%_100%]", resolveRarityColor(rarity, "gradient"))}>
       <StreakIcon rarity={rarity} />
-      <span className={clsx("text-xl font-bold",resolveRarityColor(rarity))}>{days}</span>
+      <span className={clsx("text-l font-bold",resolveRarityColor(rarity))}>{days}</span>
     </button>
   );
 }

@@ -15,8 +15,6 @@ import type {WithId} from "@/types/with-id";
 import type {Streak} from "@/types/streak";
 import {resolveRarityFromDays} from "@/functions/resolve-rarity-from-days";
 import {resolveDaysFromResets} from "@/functions/resolve-rarity-from-resets";
-import clsx from "clsx";
-import {resolveRarityColor} from "@/functions/resolve-rarity-color";
 import StreakCardButton from "@/components/streak-card-button";
 
 const StreakEditFormSchema = z.object({

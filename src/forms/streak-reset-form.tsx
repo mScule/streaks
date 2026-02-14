@@ -9,10 +9,8 @@ import {TypographyP} from "@/shadcn/typography/typography-p";
 import type {Streak} from "@/types/streak";
 import {useUpdateStreak} from "@/react-query/hooks/streak/use-update-streak";
 import {isoDateStringFromDate} from "@/functions/iso-date-string-from-date";
-import {resolveRarityColor} from "@/functions/resolve-rarity-color";
 import {resolveRarityFromDays} from "@/functions/resolve-rarity-from-days";
 import {resolveDaysFromResets} from "@/functions/resolve-rarity-from-resets";
-import clsx from "clsx";
 import StreakCardButton from "@/components/streak-card-button";
 
 type Props = {
