@@ -10,8 +10,9 @@ import type {Streak} from "@/types/streak";
 import {useDeleteStreak} from "@/react-query/hooks/streak/use-delete-streak";
 import clsx from "clsx";
 import {resolveRarityColor} from "@/functions/resolve-rarity-color";
-import { resolveRarityFromDays } from "@/functions/resolve-rarity-from-days";
-import { resolveDaysFromResets } from "@/functions/resolve-rarity-from-resets";
+import {resolveRarityFromDays} from "@/functions/resolve-rarity-from-days";
+import {resolveDaysFromResets} from "@/functions/resolve-rarity-from-resets";
+import StreakCardButton from "@/components/streak-card-button";
 
 type Props = {
   streak: WithId<Streak>;
@@ -39,12 +40,10 @@ export function StreakDeletionForm({streak}: Props) {
   return (
     <Dialog open={isOpen} onOpenChange={isOpen => setIsOpen(isOpen)}>
       <DialogTrigger asChild>
-        <div className={clsx("border rounded-xl", resolveRarityColor(rarity, "border"))}>
-          <Button variant="ghost" className={clsx(resolveRarityColor(rarity, "text"), "hover:bg-transparent!")}>
-            <span>Delete</span>
-            <TrashIcon />
-          </Button>
-        </div>
+        <StreakCardButton rarity={rarity}>
+          <span>Delete</span>
+          <TrashIcon size={16} />
+        </StreakCardButton>
       </DialogTrigger>
 
       <DialogContent>

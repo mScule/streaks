@@ -13,6 +13,7 @@ import {resolveRarityColor} from "@/functions/resolve-rarity-color";
 import {resolveRarityFromDays} from "@/functions/resolve-rarity-from-days";
 import {resolveDaysFromResets} from "@/functions/resolve-rarity-from-resets";
 import clsx from "clsx";
+import StreakCardButton from "@/components/streak-card-button";
 
 type Props = {
   streak: WithId<Streak>;
@@ -43,12 +44,10 @@ export function StreakResetForm({streak}: Props) {
   return (
     <Dialog open={isOpen} onOpenChange={isOpen => setIsOpen(isOpen)}>
       <DialogTrigger asChild>
-        <div className={clsx("border rounded-xl", resolveRarityColor(rarity, "border"))}>
-          <Button variant="ghost" className={clsx(resolveRarityColor(rarity, "text"), "hover:bg-transparent!")}>
-            <span>Reset</span>
-            <RotateCcwIcon />
-          </Button>
-        </div>
+        <StreakCardButton rarity={rarity}>
+          <span>Reset</span>
+          <RotateCcwIcon size={16} />
+        </StreakCardButton>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
