@@ -9,7 +9,7 @@ import {resolveRarityFromDays} from "@/functions/resolve-rarity-from-days";
 import {StreakEditForm} from "@/forms/streak-edit-form";
 import {resolveDaysFromResets} from "@/functions/resolve-rarity-from-resets";
 import {first} from "lodash";
-import { StreakLabel } from "./streak-label";
+import {StreakLabel} from "./streak-label";
 
 type Props = {
   streak: WithId<Streak>;
@@ -30,10 +30,21 @@ export function StreakCard({streak}: Props) {
         <div className="flex flex-row gap-2 justify-between items-center">
           <span className={clsx("font-bold", resolveRarityColor(rarity, "text"))}>{streak.name}</span>
           <div className="flex flex-col gap-2 items-center">
-            <StreakCounter days={days} />
+            <StreakCounter days={days} target={streak.target} />
             <StreakLabel rarity={rarity} />
           </div>
         </div>
+
+        {streak.rules && (
+          <div>
+            <span className={clsx(resolveRarityColor(rarity), "font-bold text-xs")}>Rules:</span>
+            {streak.rules.split("\n").map(line => (
+              <p key={line} className={clsx(resolveRarityColor(rarity), "text-xs italic")}>
+                {line}
+              </p>
+            ))}
+          </div>
+        )}
 
         <div className="flex flex-row justify-between">
           <span className={clsx("text-xs italic", resolveRarityColor(rarity, "text"))}>
